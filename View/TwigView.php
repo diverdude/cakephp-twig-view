@@ -265,7 +265,7 @@ class TwigView extends View {
 	function element1x($name, $params = array(), $loadHelpers = false) {
 		// render and revert to using .tpl
 		$return = parent::element($name, $params, $loadHelpers);
-		$this->ext = '.tpl';
+		$this->ext = '.twig';
 		return $return;
 	}
 	
@@ -275,7 +275,7 @@ class TwigView extends View {
 	function element2x($name, $params = array(), $callbacks = false) {
 		// render and revert to using .tpl
 		$return = parent::element($name, $params, $callbacks);
-		$this->ext = '.tpl';
+		$this->ext = '.twig';
 		return $return;
 	}
 	
@@ -286,9 +286,9 @@ class TwigView extends View {
 	 */
 	public function element($name, $params = array(), $callbacks = false) {
 		// email hack
-		if (substr($name, 0, 5) != 'email') {
-			$this->ext = '.ctp'; // not an email, use .ctp
-		}
+		//if (substr($name, 0, 5) != 'email') {
+		//	$this->ext = '.ctp'; // not an email, use .ctp
+		//}
 		
 		if ($this->isCake2()) {
 			return $this->element2x($name, $params, $callbacks);
