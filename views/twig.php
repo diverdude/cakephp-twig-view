@@ -14,7 +14,8 @@
  * @license MIT License
  */
 if (!defined('TWIG_VIEW_CACHE')) {
-	define('TWIG_VIEW_CACHE', APP.'plugins'.DS.'twig_view'.DS.'tmp'.DS.'views');
+    //define('TWIG_VIEW_CACHE', APP.'plugins'.DS.'twig_view'.DS.'tmp'.DS.'views');
+    define('TWIG_VIEW_CACHE', APP.'tmp'.DS.'cache'.DS.'views');
 }
 
 // Load Twig Lib and start auto loader
@@ -47,7 +48,7 @@ App::import('Lib', 'TwigView.CoreExtension');
  */
 class TwigView extends View {
 	
-	public $ext = '.tpl';
+	public $ext = '.twig';
 	
 	/**
 	 * Twig Environment Instance
@@ -104,7 +105,7 @@ class TwigView extends View {
 		if (isset($controller->theme))
 			$this->theme =& $controller->theme;
 			
-		$this->ext = '.tpl';
+		$this->ext = '.twig';
 	}
 	
 	/**
@@ -295,6 +296,20 @@ class TwigView extends View {
 			return $this->element1x($name, $params, $callbacks);
 		}
 	}
+
+        protected $_rendElms=array();
+        public function saveRenderedElement($key=0,$name, $params = array(), $callbacks = false) {
+            if(empty ($key) | $key===0)
+                $this->_rendElms[]=$this->element ($name,$params,$callbacks);
+            else
+                $this->_rendElms[$key]=$this->element ($name,$params,$callbacks);
+        }
+        public function getRenderedElement($key){
+            return $this->_rendElms[$key];
+        }
+        public function pt(){
+            var_dump($this);
+        }
 
 	/**
 	 * Return all possible paths to find view files in order
