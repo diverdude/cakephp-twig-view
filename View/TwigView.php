@@ -70,12 +70,12 @@ class TwigView extends View {
 		
 		// just collecting for str_replace
 		$this->templatePaths = array(
-			APP.'views',
+			APP.'View',
 			ROOT.DS.'cake'.DS.'libs'.DS.'view'
 		);
 		
 		// we always look in APP, this includes error templates.
-		$loader = new Twig_Loader_Filesystem(APP.'views');
+		$loader = new Twig_Loader_Filesystem(APP.'View');
 		
 		// setup twig and go.
 		$this->Twig = new Twig_Environment($loader, array(
